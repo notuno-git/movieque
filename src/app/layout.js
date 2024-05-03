@@ -9,6 +9,7 @@ import "@/../public/assets/scss/style.scss";
 import { Dosis, Jost, Big_Shoulders_Display } from "next/font/google";
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/context/ThemeContext";
+import ReduxProvider from "@/redux/ReduxProvider";
 
 const lowball = localFont({
   src: [
@@ -114,8 +115,10 @@ export default function RootLayout({ children }) {
         <body
           className={`${lowball.variable} ${dosisSecondary.variable} ${dosisBody.variable} ${jost.variable} ${bigShouldersDisplay.variable}`}
         >
+          <ReduxProvider>
           {children}
           <BootstrapClient />
+          </ReduxProvider>
         </body>
       </html>
     </ThemeProvider>
