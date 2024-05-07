@@ -83,13 +83,7 @@
     letter-spacing: 0.8px;
     span {
       position: relative;
-      background: linear-gradient(
-          92deg,
-          #5a0dff 0%,
-          #ff29b8 38.6%,
-          #ff581c 97.73%
-        ),
-        var(--body-bg);
+      background: #009DDA;
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;

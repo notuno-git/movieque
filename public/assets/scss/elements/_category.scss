@@ -116,12 +116,7 @@
       transition: background-image 300ms ease;
 
       &:hover {
-        background-image: linear-gradient(
-            139deg,
-            rgba(255, 255, 255, 0.18) 19.65%,
-            rgba(255, 255, 255, 0.03) 50.98%
-          ),
-          linear-gradient(92deg, #5a0dff 0%, #ff29b8 38.6%, #ff581c 97.73%);
+        background: #009DDA;
       }
     }
   }
@@ -138,9 +133,9 @@
     background-color: #ff581c;
     background: linear-gradient(
         92deg,
-        #5a0dff 0%,
-        #ff29b8 38.6%,
-        #ff581c 97.73%
+        #009DDA 0%,
+        #ff581c 38.6%,
+        #AD0F7D 97.73%
       )
       border-box;
     -webkit-mask: linear-gradient(#fff 0 0) padding-box,

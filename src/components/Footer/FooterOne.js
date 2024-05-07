@@ -12,7 +12,7 @@ export default function FooterOne() {
           <div className="col-md-6 col-xl-4">
             <div className="footer-widget widget-about">
               <Link href="#" className="thumb d-inline-block">
-                <Image src={logo} alt="logo" width={100} />
+                <Image src={logo} alt="logo" width={150} />
               </Link>
               <div className="details">
                 <p className="lh-1">Connected with us!</p>

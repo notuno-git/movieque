@@ -2561,7 +2561,7 @@ button.hl-btn:active span {
 }
 .movie-card-small .movie-badge span {
   position: relative;
-  background: #AD0F7D;
+  background: #009DDA;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -4050,7 +4050,7 @@ button.hl-btn:active span {
   transition: background-image 300ms ease;
 }
 .category-card .details .circle-btn:hover {
-  background: #AD0F7D;
+  background: #009DDA;
 }
 .category-card::before {
   content: "";
@@ -4062,7 +4062,7 @@ button.hl-btn:active span {
   border: 2px solid transparent;
   border-radius: 30px;
   background-color: #ff581c;
-  background: linear-gradient(92deg, #5a0dff 0%, #ff29b8 38.6%, #ff581c 97.73%) border-box;
+  background: linear-gradient(92deg, #AD0F7D 0%, #009DDA 38.6%, #ff581c 97.73%) border-box;
   -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;

@@ -36,57 +36,69 @@ const menuOneData = {
       href: "#",
       subMenus: [
         {
-          name: "About Us",
-          href: "about",
-        },
-        {
           name: "Movie Details",
           href: "movie-details",
-        },
-        {
-          name: "Playlist",
-          href: "playlist",
-        },
-        {
-          name: "Category",
-          href: "category",
         },
         {
           name: "Category Grid",
           href: "category-grid",
         },
         {
-          name: "Category List",
-          href: "category-list",
-        },
-        {
           name: "Privacy Policy",
           href: "privacy-policy",
         },
         {
-          name: "Pricing",
-          href: "pricing",
+          name: "Celebs",
+          href: "about",
         },
         {
-          name: "Pagination 01",
-          href: "pagination-one",
-        },
-        {
-          name: "Pagination 02",
-          href: "pagination-two",
-        },
-        {
-          name: "Blog",
+          name: "Awards and Events",
           href: "blog",
         },
         {
-          name: "Blog Details",
-          href: "blog-details",
+          name: "Sign in",
+          href: "auth",
         },
-        {
-          name: "404",
-          href: "not-found",
-        },
+        // {
+        //   name: "About Us",
+        //   href: "about",
+        // },
+        // {
+        //   name: "Playlist",
+        //   href: "playlist",
+        // },
+        // {
+        //   name: "Category",
+        //   href: "category",
+        // },
+        // {
+        //   name: "Category List",
+        //   href: "category-list",
+        // },
+        // {
+        //   name: "Pricing",
+        //   href: "pricing",
+        // },
+        // {
+        //   name: "Pagination 01",
+        //   href: "pagination-one",
+        // },
+        // {
+        //   name: "Pagination 02",
+        //   href: "pagination-two",
+        // },
+        // {
+        //   name: "Blog",
+        //   href: "blog",
+        // },
+        // {
+        //   name: "Blog Details",
+        //   href: "blog-details",
+        // },
+        // {
+        //   name: "404",
+        //   href: "not-found",
+        // },
       ],
     },
   ],
