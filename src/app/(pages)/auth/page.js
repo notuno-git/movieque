@@ -27,7 +27,7 @@ export default function Auth() {
           </div>
           <div className="tab__content">
             {activeTab === 'login' && <Login />}
-            {activeTab === 'register' && <Register />}
+            {activeTab === 'register' && <Register setActiveTab={setActiveTab} />}
           </div>
         </div>
 

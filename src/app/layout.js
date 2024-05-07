@@ -5,11 +5,14 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "glightbox/dist/css/glightbox.min.css";
 import "@/../public/assets/scss/style.scss";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Dosis, Jost, Big_Shoulders_Display } from "next/font/google";
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/context/ThemeContext";
 import ReduxProvider from "@/redux/ReduxProvider";
+
 
 const lowball = localFont({
   src: [
@@ -117,6 +120,7 @@ export default function RootLayout({ children }) {
         >
           <ReduxProvider>
           {children}
+          <ToastContainer />
           <BootstrapClient />
           </ReduxProvider>
         </body>
