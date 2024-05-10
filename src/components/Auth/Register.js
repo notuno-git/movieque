@@ -30,28 +30,28 @@ export default function Register({ setActiveTab }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (!formData.username || !formData.email || !formData.password) {
-    //   setErrors("Must provided all the cridential")
-    // }
+    if (!formData.username || !formData.email || !formData.password) {
+      setErrors("Must provided all the cridential")
+    }
 
     // Validation
-    const errors = {};
-    if (formData.username.trim().length < 3) {
-      errors.username = "Full Name must be at least 3 characters long";
-    }
-    if (!isValidEmail(formData.email)) {
-      errors.email = "Invalid email address";
-    }
-    if (formData.password.length < 8) {
-      errors.password = "Password must be at least 8 characters long";
-    }
-    if (formData.password !== formData.confirmPassword) {
-      errors.confirmPassword = "Passwords do not match";
-    }
-    if (Object.keys(errors).length > 0) {
-      setErrors(errors);
-      return;
-    }
+    // const errors = {};
+    // if (formData.username.trim().length < 3) {
+    //   errors.username = "Full Name must be at least 3 characters long";
+    // }
+    // if (!isValidEmail(formData.email)) {
+    //   errors.email = "Invalid email address";
+    // }
+    // if (formData.password.length < 8) {
+    //   errors.password = "Password must be at least 8 characters long";
+    // }
+    // if (formData.password !== formData.confirmPassword) {
+    //   errors.confirmPassword = "Passwords do not match";
+    // }
+    // if (Object.keys(errors).length > 0) {
+    //   setErrors(errors);
+    //   return;
+    // }
 
     try {
       setPending(true);
@@ -82,20 +82,24 @@ export default function Register({ setActiveTab }) {
   };
 
   // Email validation function
-  const isValidEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+  // const isValidEmail = (email) => {
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   return emailRegex.test(email);
+  // };
+
+  // if (sessionStatus === "loading") {
+  //   return <h1>Loading...</h1>;
+  // }
 
 
   return (
     <div className="auth container">
       <div className="row justify-content-center">
 
-        <div class="box reg-box">
-          <form class="form" onSubmit={handleSubmit}>
+        <div className="box reg-box">
+          <form className="form" onSubmit={handleSubmit}>
             <h2>Register</h2>
-            <div class="inputBox">
+            <div className="inputBox">
               <input
                 type="text"
                 name="username"
@@ -154,7 +158,9 @@ export default function Register({ setActiveTab }) {
               {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
               <i></i>
             </div>
-            <button className="sub-btn">Register</button>
+            <button className="sub-btn" disabled={pending ? true : false}>
+              {pending ? "Registering" : "Register"}
+            </button>
           </form>
         </div>
 

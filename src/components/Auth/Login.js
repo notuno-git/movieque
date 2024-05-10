@@ -1,8 +1,71 @@
 "use client"
-import { useState } from 'react';
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import "./auth.css"
 
 export default function Login() {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const [error, setError] = useState('');
+  const [pending, setPending] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+    // Clear the error message when the input value changes
+    setError({
+      ...error,
+      [name]: ''
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.email || !formData.password) {
+      setError("Must provided all the cridential")
+    }
+    console.log(formData);
+
+    try {
+      setPending(true);
+      const res = await signIn("credentials", {
+        email: formData.email,
+        password: formData.password,
+        redirect: false
+      })
+      if(res.error){
+        setError("invalid credential")
+        setPending(false);
+        return;
+      }
+      router.replace("/")
+    } catch (error) {
+      setPending(false);
+      console.log("Something went wrong:", error);
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const [forgotPasswordVisible, setForgotPasswordVisible] = useState(false);
 
   const handleForgotPasswordClick = () => {
@@ -13,35 +76,50 @@ export default function Login() {
     setForgotPasswordVisible(false);
   };
 
+
+
   return (
     <div className="auth container">
       <div className="row justify-content-center">
         {!forgotPasswordVisible && (
-          <div class="box">
-            <div class="form">
+          <div className="box">
+            <form className="form" onSubmit={handleSubmit}>
               <h2>Login</h2>
-              <div class="inputBox">
-                <input type="text" required="required" />
-                <span>Username</span>
+              <div className="inputBox">
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <span>Email</span>
+                {error.email && <div className="error">{error.email}</div>}
                 <i></i>
               </div>
-              <div class="inputBox">
-                <input type="password" required="required" />
+              <div className="inputBox">
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
                 <span>Password</span>
+                {error.password && <div className="error">{error.password}</div>}
                 <i></i>
               </div>
-              <div class="links">
-                <a href="#" onClick={handleForgotPasswordClick}>Forgot password?</a>
-              </div>
-              <button className="sub-btn">Login</button>
-            </div>
+              <button className="sub-btn" disabled={pending ? true : false}>
+                {pending ? "Signing" : "Sign in"}
+              </button>
+            </form>
           </div>
         )}
         {forgotPasswordVisible && (
-          <div class="box">
-            <div class="form">
+          <div className="box">
+            <div className="form">
               <h2>Forgot password</h2>
-              <div class="inputBox">
+              <div className="inputBox">
                 <input type="text" required="required" />
                 <span>Email</span>
                 <i></i>

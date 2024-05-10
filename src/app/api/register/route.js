@@ -1,11 +1,10 @@
-import { NextResponse } from "next/server";
 import connect from "@/utils/db";
 import User from "@/models/User";
 import bcrypt from "bcrypt";
-
+import { NextResponse } from 'next/server';
 
 export const POST = async (request) => {
-  const { email, password } = await request.json();
+  const { username, phone, email, password } = await request.json();
 
   await connect();
 
@@ -17,14 +16,17 @@ export const POST = async (request) => {
 
   const hashedPassword = await bcrypt.hash(password, 5);
   const newUser = new User({
+    username,
+    phone,
     email,
     password: hashedPassword,
   });
 
   try {
     await newUser.save();
-    return new NextResponse("user is registered", { status: 200 });
+    return new NextResponse("User is registered", { status: 200 });
   } catch (err) {
+    console.log(err);
     return new NextResponse(err, {
       status: 500,
     });

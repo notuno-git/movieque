@@ -33,13 +33,13 @@ export default function Auth() {
 
         {/* <div className="py-80">
           <div className='row justify-content-center mt-80 p-0'>
-            <ul class="tabs">
-              <li class="active">Login</li>
+            <ul className="tabs">
+              <li className="active">Login</li>
               <li>Register</li>
             </ul>
           </div>
-          <ul class="tab__content">
-            <li class="active">
+          <ul className="tab__content">
+            <li className="active">
               <Login />
             </li>
             <li>
