@@ -32,7 +32,6 @@ export default function Login() {
       setError("Must provided all the cridential")
     }
     console.log(formData);
-
     try {
       setPending(true);
       const res = await signIn("credentials", {
@@ -40,12 +39,12 @@ export default function Login() {
         password: formData.password,
         redirect: false
       })
-      if(res.error){
+      if (res.error) {
         setError("invalid credential")
         setPending(false);
         return;
       }
-      router.replace("/")
+      router.push("/");
     } catch (error) {
       setPending(false);
       console.log("Something went wrong:", error);

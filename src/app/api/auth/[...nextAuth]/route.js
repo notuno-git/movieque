@@ -1,60 +1,45 @@
-import NextAuth, { Account, User as AuthUser } from "next-auth";
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import User from "@/models/User";
 import connect from "@/utils/db";
 
-async function login(credentials) {
-  try {
-    connect();
-    const user = await User.findOne({ email: credentials.email });
-    if (!user) throw new Error("wrong credentials")
-    const isCorrect = await bcrypt.compare(credentials.password, user.password)
-    if (!isCorrect) throw new Error("wrong credentials")
-    return user
-  } catch (error) {
-    console.log("error while login");
-    throw new Error(err);
-  }
-}
-
-const authOptions = {
+export const authOptions = {
   providers: [
     CredentialsProvider({
+      id: "credentials",
       name: "Credentials",
-      credentials: {},
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
       async authorize(credentials) {
         await connect();
         try {
-          const user = await login(credentials);
-          return user
+          const user = await User.findOne({ email: credentials.email });
+          if (user) {
+            const isPasswordCorrect = await bcrypt.compare(
+              credentials.password,
+              user.password
+            );
+            if (isPasswordCorrect) {
+              return user;
+            }
+          }
         } catch (err) {
-          throw new Error("Fail to login");
+          throw new Error(err);
         }
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.username = user.username;
-        token.email = user.email;
-        token.id = user.id;
+    async signIn({ account }) {
+      if (account?.provider == "credentials") {
+        return true;
       }
-      console.log("this is token", token);
-      return
     },
-    async session({ session, token }) {
-      if (session) {
-        session.user.username = token.username;
-        session.user.email = token.email;
-        session.user.id = token.id;
-      }
-      console.log("this is session", session);
-      return
-    }
-  }
-}
+  },
+};
 
-const handler = NextAuth(authOptions)
-export { handler as GET, handler as POST }
+export const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };

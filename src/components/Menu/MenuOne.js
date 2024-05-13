@@ -4,12 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import profileImage from "@/../public/assets/images/icons/profile.svg";
 import { useThemeContext } from "@/context//ThemeContext";
-
+import { FaRegUserCircle } from "react-icons/fa";
 import { menuOneData as data } from "@/data/menu";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { signOut, useSession } from "next-auth/react";
 
 export default function MenuOne() {
+  const { data: session } = useSession();
+  console.log(session);
   const { toggleMobileMenu } = useThemeContext();
   const [showBox, setShowBox] = useState(false);
   const pathName = usePathname();
@@ -205,9 +208,23 @@ export default function MenuOne() {
               </form>
             </div>
           </div>
-          <Link href="auth" className="profile-btn d-inline-block">
-            <Image src={profileImage} alt="profile" className="w-100 h-100" />
-          </Link>
+
+          {!session ? (
+            <Link href="auth" className="profile-btn d-inline-block">
+              <Image src={profileImage} alt="profile" className="w-100 h-100" />
+            </Link>
+          ) : (
+            <>
+              <Link className="nav-link logged-user" href="/" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ display: 'flex', gap: '5px' }}>
+                <FaRegUserCircle />
+                <span style={{ textTransform: 'capitalize', fontWeight: 700 }}> {session.user?.email.split('@')[0]}</span>
+              </Link>
+              <ul className="dropdown-menu child-drop" aria-labelledby="userDropdown">
+                <li><Link className="dropdown-item" href='#' onClick={() => { signOut() }}>Logout</Link></li>
+              </ul>
+            </>
+          )}
+
           <Link
             href="pricing"
             className="hl-btn btn-base text-uppercase d-xl-inline-block d-none"
