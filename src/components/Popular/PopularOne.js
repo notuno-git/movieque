@@ -1,12 +1,33 @@
 "use client";
-
+// import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
-
 import { popularOneMoviesData as movies } from "@/data/movie";
 import MovieCard from "@/components/Card/MovieCard";
+// import { useDispatch, useSelector } from 'react-redux';
+// import { fetchMovies } from "@/redux/slice/moviesSlice";
 
 export default function PopularOne() {
+
+  // const dispatch = useDispatch();
+  // const { movies, status, error } = useSelector((state) => state.movies);
+
+  // useEffect(() => {
+  //   dispatch(fetchMovies());
+  // }, [dispatch]);
+
+  // console.log(movies);
+
+  // if (status === 'loading') {
+  //   return <div>Loading...</div>;
+  // }
+
+  // if (status === 'failed') {
+  //   return <div>Error: {error}</div>;
+  // }
+
+  console.log(movies);
+
   const swiperOptions = {
     speed: 1000,
     spaceBetween: 10,
@@ -77,6 +98,16 @@ export default function PopularOne() {
           ))}
         </Swiper>
       )}
+
+      {/* <div>
+        <h2>Movies</h2>
+        <ul>
+          {movies?.map((movie) => (
+            <li key={movie.id}>{movie?.movie}</li>
+          ))}
+        </ul>
+      </div> */}
+
     </div>
   );
 }

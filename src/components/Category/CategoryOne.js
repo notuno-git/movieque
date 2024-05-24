@@ -1,11 +1,32 @@
 "use client";
-
+import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import categories from "@/data/category";
+// import categories from "@/data/category";
 import CategoryCard from "@/components/Card/CategoryCard";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMovies } from "@/redux/slice/moviesSlice";
 
 export default function CategoryOne() {
+
+  const dispatch = useDispatch();
+  const { movies, status, error } = useSelector((state) => state.movies);
+
+  useEffect(() => {
+    dispatch(fetchMovies());
+  }, [dispatch]);
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (status === 'failed') {
+    return <div>Error: {error}</div>;
+  }
+
+  console.log("cat", movies);
+
+
   const swiperOptions = {
     speed: 5000,
     spaceBetween: 10,
@@ -34,9 +55,9 @@ export default function CategoryOne() {
           </div>
         </div>
       </div>
-      {categories && categories.length > 0 && (
+      {movies && movies.length > 0 && (
         <Swiper {...swiperOptions} className="swiper categories-slider">
-          {categories.map((category, index) => (
+          {movies.map((category, index) => (
             <SwiperSlide key={index}>
               <CategoryCard category={category} />
             </SwiperSlide>

@@ -2,18 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function CategoryCard({ category }) {
+  console.log(category);
   return (
     <div className="category-card">
       <div className="thumbnail">
-        <Image
-          src={category.image}
+        <img
+          src={category?.image}
           alt="category"
           className="thumb-img w-100"
+          // width={100}
+          // height={400}
         />
       </div>
       <div className="details">
-        <h4 className="title lh-1 mb-0">{category.title}</h4>
-        <Link href={category.href} className="hl-btn circle-btn flex-shrink-0">
+        <h4 className="title lh-1 mb-0">{category?.movie}</h4>
+        <Link href="" className="hl-btn circle-btn flex-shrink-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
